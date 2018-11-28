@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Basic WebAssembly</title>
+  </head>
+  <body>
+    <h1>Basic</h1>
+    <h2>Invoke <code>WebAssembly</code> from <code>JavaScript</code></h2>
+    <h2>Build</h3>
+    <pre>
+cargo build --target wasm32-unknown-unknown --release
+wasm-gc ./target/wasm32-unknown-unknown/release/utils.wasm -o ./utils.gc.wasm</pre
+    >
+    <h3>Launch</h3>
+    <pre>serve .</pre>
+    <h3>Runtime</h3>
+    <p><code>sum(1,1)</code> = <span id="result-wasm-from-js-1"></span></p>
+    <p><code>sum(2,3)</code> = <span id="result-wasm-from-js-2"></span></p>
+    <script>
+      // fetch entire wasm file before instantiate
+      fetch("./utils.gc.wasm")
+        .then(response => response.arrayBuffer())
+        .then(result => WebAssembly.instantiate(result))
+        .then(wasmModule => {
+          const result = wasmModule.instance.exports.sum(1, 1);
+          document.getElementById("result-wasm-from-js-1").innerText = result;
+        });
+      // stream/compile/instantiate at once
+      WebAssembly.instantiateStreaming(fetch("utils.gc.wasm")).then(
+        wasmModule => {
+          const result = wasmModule.instance.exports.sum(2, 3);
+          document.getElementById("result-wasm-from-js-2").innerText = result;
+        }
+      );
+    </script>
+  </body>
+</html>

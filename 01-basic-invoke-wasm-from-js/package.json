@@ -1,0 +1,8 @@
+{
+  "name": "01-vanilla-basic",
+  "scripts": {
+    "build:wasm": "cargo build --target wasm32-unknown-unknown --release",
+    "build:wasm-gc": "wasm-gc ./target/wasm32-unknown-unknown/release/utils.wasm -o ./utils.gc.wasm",
+    "build": "npm run build:wasm && npm run build:wasm-gc"
+  }
+}

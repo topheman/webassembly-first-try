@@ -1,0 +1,13 @@
+{
+  "name": "webassembly-first-try",
+  "version": "0.0.1",
+  "description": "",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "WebAssembly", "Rust", "wasm"
+  ],
+  "author": "Christophe Rosset <tophe@topheman.com> (http://labs.topheman.com/)",
+  "license": "MIT"
+}
