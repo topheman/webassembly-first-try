@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Basic WebAssembly</title>
+  </head>
+  <body>
+    <h1>Basic</h1>
+    <h2>Invoke <code>JavaScript</code> from <code>WebAssembly</code></h2>
+    <h2>Build</h3>
+    <pre>
+cargo build --target wasm32-unknown-unknown --release
+wasm-gc ./target/wasm32-unknown-unknown/release/utils.wasm -o ./utils.gc.wasm</pre
+    >
+    <h3>Launch</h3>
+    <pre>serve .</pre>
+    <h3>Runtime</h3>
+    <p>Appended from Rust:</p>
+    <p id="result-js-from-wasm-1"></p>
+    <script>
+      // expose JavaScript functions to Rust via `WebAssembly.instantiateStreaming`
+      const importObject = {
+        env: {
+          consoleLogString(message) {
+            console.log("FROM Rust", message);
+          },
+          appendStringToDOM(message) {
+            document.getElementById(
+              "result-js-from-wasm-1"
+            ).innerText = message;
+          }
+        }
+      };
+      WebAssembly.instantiateStreaming(
+        fetch("./utils.gc.wasm"),
+        importObject
+      ).then(wasmModule => {
+        wasmModule.instance.exports.run();
+      });
+    </script>
+  </body>
+</html>

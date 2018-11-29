@@ -1,0 +1,10 @@
+[package]
+name = "utils"
+version = "0.1.0"
+authors = ["Christophe Rosset <tophe@topheman.com>"]
+
+[dependencies]
+
+[lib]
+# Used when compiling a dynamic library - see https://doc.rust-lang.org/reference/linkage.html
+crate-type = ["cdylib"]
