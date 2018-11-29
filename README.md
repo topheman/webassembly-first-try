@@ -13,4 +13,5 @@ In the first step we'll need [`wasm-gc`](https://github.com/alexcrichton/wasm-gc
 
 ```shell
 cargo install wasm-gc
+cargo install wasm-pack
 ```
