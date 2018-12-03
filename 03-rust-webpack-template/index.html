@@ -1,10 +1,17 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta http-equiv="Content-type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
     <title>My awesome Rust, WebAssembly, and Webpack application</title>
   </head>
   <body>
+    <p data-id="hello-js">
+      Hello from JavaScript! <button>Click to invoke JavaScript's
+      <code>alert()</code> from Rust</button>.
+    </p>
+    <p>
+      <em>JavaScript</em> -> click -> <code>run_alert(message)</code> ->
+      <em>WebAssembly(Rust)</em> -> <em>JavaScript</em> -> <code></code>alert(message)</code>
+    </p>
   </body>
 </html>
-

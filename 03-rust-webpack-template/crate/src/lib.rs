@@ -27,6 +27,14 @@ cfg_if! {
     }
 }
 
+// JavaScript invoked from wasm(rust) (declare them here)
+#[wasm_bindgen]
+extern "C" {
+    fn alert(s: &str);
+}
+
+// wasm(rust) invoked from JavaScript
+
 // Called by our JS entry point to run the example.
 #[wasm_bindgen]
 pub fn run() -> Result<(), JsValue> {
@@ -36,11 +44,16 @@ pub fn run() -> Result<(), JsValue> {
     let document = window.document().expect("should have a Document");
 
     let p: web_sys::Node = document.create_element("p")?.into();
-    p.set_text_content(Some("Hello from Rust, WebAssembly, and Webpack!"));
+    p.set_text_content(Some("Hello from Rust and WebAssembly!"));
 
     let body = document.body().expect("should have a body");
     let body: &web_sys::Node = body.as_ref();
     body.append_child(&p)?;
 
     Ok(())
+}
+
+#[wasm_bindgen]
+pub fn run_alert(message: &str) {
+    alert(message);
 }
