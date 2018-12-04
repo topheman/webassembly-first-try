@@ -4,7 +4,7 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const dist = path.resolve(__dirname, "dist");
 const WasmPackPlugin = require("@wasm-tool/wasm-pack-plugin");
 
-module.exports = {
+module.exports = (env, argv) => ({
   entry: "./js/index.js",
   output: {
     path: dist,
@@ -20,7 +20,7 @@ module.exports = {
 
     new WasmPackPlugin({
       crateDirectory: path.resolve(__dirname, "crate"),
-      forceWatch: true // rebuild on changes on `*.rs` files
+      forceWatch: argv.mode === "development" && argv.debug === true // rebuild on changes on `*.rs` files in dev mode
     })
   ]
-};
+});
